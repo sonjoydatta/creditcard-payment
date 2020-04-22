@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import { handleFocus, handleFocusOut } from '../utils';
 
 const InputField = ( props ) => {
-  const { unique, label, name, value, children, ...rest } = props;
+  const { unique, label, name, value, error, ...rest } = props;
 
   return (
     <Form.Group controlId={unique}>
@@ -15,8 +15,11 @@ const InputField = ( props ) => {
         value={value}
         onFocus={handleFocus}
         onBlur={handleFocusOut}
+        isInvalid={!!error}
       />
-      {children}
+      <Form.Control.Feedback type="invalid">
+        {error}
+      </Form.Control.Feedback>
     </Form.Group>
   );
 }

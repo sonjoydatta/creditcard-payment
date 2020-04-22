@@ -11,13 +11,16 @@ const Homepage = () => {
     name: '',
     number: '',
     expiry: '',
-    security: ''
+    security: '',
+    errors: {}
   });
 
+  // Input field onChange handler
   const handleChange = ( e ) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   }
 
+  // Input card expiry onKeyUp handler
   const handleCardExpiry = ( e ) => {
     let expiryDate = e.target.value;
   
@@ -34,10 +37,60 @@ const Homepage = () => {
     }
   }
 
+  // Input fields validation handler
+  const handleValidation = () => {
+    const { name, number, expiry, security, errors } = contact;
+    let formIsValid = true;
+
+    if (!name) {
+      formIsValid = false;
+      errors['name'] = 'Cardholder name is required';
+    } else {
+      errors['name'] = '';
+    }
+
+    if (!number) {
+      formIsValid = false;
+      errors['number'] = 'Card number is required';
+    } else {
+      errors['number'] = '';
+    }
+
+    if (!expiry) {
+      formIsValid = false;
+      errors['expiry'] = 'Expiry is required';
+    } else {
+      errors['expiry'] = '';
+    }
+
+    if (!security) {
+      formIsValid = false;
+      errors['security'] = 'CVV is required';
+    } else {
+      errors['security'] = '';
+    }
+
+    setContact({ ...contact, errors: errors });
+    return formIsValid;
+  } 
+
+  // Form onSubmit handler
   const handleSubmit = ( e ) => {
     e.preventDefault();
-    console.log(contact);
+    const { name, number, expiry, security } = contact;
+
+    if (handleValidation()) {
+      setContact({ ...contact, errors: {} });
+      console.log({
+        name,
+        number,
+        expiry,
+        security
+      });
+    }
   }
+
+  const { name, number, expiry, security, errors } = contact;
 
   return (
     <LayoutWrapper>
@@ -47,23 +100,25 @@ const Homepage = () => {
             <Card className="shadow-sm">
               <Card.Body>
                 <h3 className="CardPaymentForm-Title">Pay with Credit Card</h3>
-                <CardIconsList type={getCardType(contact.number)} />
+                <CardIconsList type={getCardType(number)} />
                 <Form onSubmit={handleSubmit}>
                   <InputField
                     unique="cardholderName"
                     label="Cardholder name"
                     name="name"
-                    value={contact.name}
+                    value={name}
                     onChange={handleChange}
+                    error={errors.name}
                   />
                   <InputField
                     unique="cardNumber"
                     label="Card number"
                     maxLength="16"
                     name="number"
-                    value={contact.number}
+                    value={number}
                     onKeyDown={handleNumbersOnly}
                     onChange={handleChange}
+                    error={errors.number}
                   />
                   <Row>
                     <Col>
@@ -72,10 +127,11 @@ const Homepage = () => {
                         label="MM/YY"
                         maxLength="5"
                         name="expiry"
-                        value={contact.expiry}
+                        value={expiry}
                         onKeyDown={handleNumbersOnly}
                         onKeyUp={handleCardExpiry}
                         onChange={handleChange}
+                        error={errors.expiry}
                       />
                     </Col>
                     <Col>
@@ -84,9 +140,10 @@ const Homepage = () => {
                         label="CVV"
                         maxLength="4"
                         name="security"
-                        value={contact.security}
+                        value={security}
                         onKeyDown={handleNumbersOnly}
                         onChange={handleChange}
+                        error={errors.security}
                       />
                     </Col>
                   </Row>

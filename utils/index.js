@@ -1,7 +1,9 @@
+// Input onFocus append class handler
 export const handleFocus = ( e ) => {
   e.target.parentElement.classList.add('focused');
 }
 
+// Input onBlur remove class handler
 export const handleFocusOut = ( e ) => {
   const hasValue = e.target.value;
 
@@ -10,6 +12,7 @@ export const handleFocusOut = ( e ) => {
   }
 }
 
+// Input onKeyDown numbers only handler
 export const handleNumbersOnly = ( e ) => {
   let flag;
 
@@ -31,6 +34,7 @@ export const handleNumbersOnly = ( e ) => {
   }
 }
 
+// Get card type based on card number
 export const getCardType = ( number ) => {
   if (number !== '' || number !== null) {
     const amexReg   = new RegExp('^3[47]');

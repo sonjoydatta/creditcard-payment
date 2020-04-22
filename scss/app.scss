@@ -40,6 +40,14 @@
       border-color: $input-focus-border-color;
       box-shadow: 0 4px 2px -2px rgba($color: $primary, $alpha: 0.25);
     }
+
+    &.is-invalid {
+
+      &:focus {
+        border-color: $danger;
+        box-shadow: 0 4px 2px -2px rgba($color: $danger, $alpha: 0.25);
+      }
+    }
   }
 }
 
