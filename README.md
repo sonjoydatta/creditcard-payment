@@ -21,4 +21,4 @@ Final outlook, when all fields are valid:<br/>
 }
 ```
 ## About me
-I am Front-end web developer with 5 years of experience. Alongside this, I am also working with the Laravel framework. For more about me please check my [Website](https://sonjoydatta.me) or [LinkedIn](https://www.linkedin.com/in/sonjoydatta) profile.
+This is Sonjoy Datta. I am a Front-end web developer with 5 years of experience. Alongside this, I am also working with the Laravel framework. For more about me please check my [Website](https://sonjoydatta.me) or [LinkedIn](https://www.linkedin.com/in/sonjoydatta) profile.
